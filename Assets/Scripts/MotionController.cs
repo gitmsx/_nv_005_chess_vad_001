@@ -8,6 +8,7 @@ public class MotionController : MonoBehaviour
     public float speed = 5.0f;
     public float cellSize = 2.0f;//размер ячейки, а также расстояни на которое нужно сдвинуться если была нажата кнопка
     bool isMoving = false;//находимся ли в движении
+    GameObject Scr1;
     Vector3 direction;//направление движения
     Vector3 destPos;//позиция куда двигаемся
 
@@ -22,7 +23,7 @@ public class MotionController : MonoBehaviour
 
     private void Start()
     {
-         RayCastOn1 rayCast1 = gameObject.AddComponent<RayCastOn1>();
+//         RayCastOn1 rayCast1 = gameObject.AddComponent<RayCastOn1>();
        // rayCast1 = new RayCastOn1();
 
     }
@@ -35,7 +36,7 @@ public class MotionController : MonoBehaviour
         {
             // isMoveEnd = false;
             KeyPressed=false;
-            rayCast1.raycast();
+            // rayCast1.raycast();
             
 
 
