@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public delegate void Ray_Delegate3();
 
@@ -27,6 +28,9 @@ public class RayCastOnDracon : MonoBehaviour
     private float TimeCircle = 0;
     private float CircleS = 0;
 
+    private int AngleSector = 0;
+
+
 
     private Ray[] ray = new Ray[4];
     
@@ -36,7 +40,7 @@ public class RayCastOnDracon : MonoBehaviour
     private  Vector3[] DirectionM = new Vector3[4];
 
 
-    
+    [HideInInspector] private Text Text__info004;
 
 
 
@@ -49,6 +53,8 @@ public class RayCastOnDracon : MonoBehaviour
         Text__info001.text = "Text__info001";
 
 
+        Text__info004 = GameObject.Find("TextInfo3").GetComponent<Text>();
+        Text__info004.text = "Text__info004";
 
 
     }
@@ -81,20 +87,61 @@ public class RayCastOnDracon : MonoBehaviour
     {
         RaycastHit hit;
 
-        DirectionM[0] = transform.forward;
+
         DirectionM[0] = Vector3.forward;
+        DirectionM[1] = Vector3.right;
+        DirectionM[2] = -Vector3.forward;
+        DirectionM[3] = -Vector3.right;
 
 
+        ray[0] = new Ray(transform.position, Vector3.forward * 30);
+        ray[0] = new Ray(transform.position, DirectionM[0] * 30);
 
-        ray[0] = new Ray(transform.position, this.gameObject.transform.GetChild(0).transform.position*777);
-        
+        ray[1] = new Ray(transform.position, Vector3.right * 30);
+        ray[2] = new Ray(transform.position, -Vector3.forward * 30);
+        ray[3] = new Ray(transform.position, -Vector3.right * 30);
 
 
+        var SignedAngle = Vector3.SignedAngle(Vector3.forward, transform.forward, Vector3.up);
 
+       
 
-        for (int i = 0; i < 1; i++)
+        if (Mathf.Approximately(SignedAngle, 90))
         {
-            if (Physics.Raycast(ray[i], out hit) )
+            Text__info004.text = " SignedAngle right " + SignedAngle.ToString();
+            AngleSector = 1;
+        }
+        else
+            if (Mathf.Approximately(SignedAngle, -90))
+        {
+            Text__info004.text = " SignedAngle left " + SignedAngle.ToString();
+            AngleSector = 3;
+        }
+        else
+            if (Mathf.Approximately(SignedAngle, 0))
+        {
+            Text__info004.text = " SignedAngle forvard " + SignedAngle.ToString();
+            AngleSector = 0;
+
+        }
+        if (Mathf.Approximately(SignedAngle, 180))
+        {
+            Text__info004.text = " SignedAngle back  180.000 " + SignedAngle.ToString();
+            AngleSector = 2;
+
+        }
+        if (Mathf.Approximately(SignedAngle, -180))
+        {
+            Text__info004.text = " SignedAngle back -180.000 " + SignedAngle.ToString();
+            AngleSector = 2;
+
+        }
+
+
+
+
+        
+            if (Physics.Raycast(ray[AngleSector], out hit) )
             {
             
 
@@ -105,7 +152,7 @@ public class RayCastOnDracon : MonoBehaviour
 
                     Pointer.position = hit.point;
 
-                    Fire(i);
+                    Fire(AngleSector);
                 }
 
 
@@ -118,7 +165,7 @@ public class RayCastOnDracon : MonoBehaviour
 
 
             }
-        }
+        
 
 
     }
