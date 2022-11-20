@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using UnityEngine.UI;
 
 public class MotionController : MonoBehaviour
 {
@@ -21,10 +21,20 @@ public class MotionController : MonoBehaviour
     private Vector3 newRotation;
     private RayCastOn1 rayCast1;
 
+    [HideInInspector] private Text Text__info002;
+
+
     private void Start()
     {
-//         RayCastOn1 rayCast1 = gameObject.AddComponent<RayCastOn1>();
-       // rayCast1 = new RayCastOn1();
+        //         RayCastOn1 rayCast1 = gameObject.AddComponent<RayCastOn1>();
+        // rayCast1 = new RayCastOn1();
+
+        
+        Text__info002 = GameObject.Find("TextInfo2").GetComponent<Text>();
+        Text__info002.text = "Text__info002";
+
+
+
 
     }
 
@@ -37,8 +47,17 @@ public class MotionController : MonoBehaviour
             // isMoveEnd = false;
             KeyPressed=false;
             // rayCast1.raycast();
-            
 
+            var trans2 = transform.rotation.y;
+
+            var angle = Vector3.Angle(Vector3.forward, transform.forward);
+            var SignedAngle = Vector3.SignedAngle(Vector3.forward, transform.forward, Vector3.up);
+
+            
+           var angleToEulerAngles = transform.rotation.ToEulerAngles();
+          //  var angleToEulerAngles2 = transform.rotation.EulerAngles(transform.forward);
+
+            Text__info002.text = " rotation.y " + trans2.ToString() + " SignedAngle  " + SignedAngle.ToString() + " angle " + angle.ToString() + " Euler Angle " + angleToEulerAngles.ToString() + " Euler Angle y" + angleToEulerAngles.y.ToString();
 
         }
 

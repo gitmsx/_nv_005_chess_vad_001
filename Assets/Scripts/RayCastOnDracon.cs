@@ -48,6 +48,9 @@ public class RayCastOnDracon : MonoBehaviour
         Text__info001 = Text7.GetComponent<Text>();
         Text__info001.text = "Text__info001";
 
+
+
+
     }
 
 
@@ -61,7 +64,13 @@ public class RayCastOnDracon : MonoBehaviour
         {
             CircleS++;
             TimeCircle = 0;
-            Text__info001.text = CircleS.ToString();
+            
+            
+            
+
+            
+
+            
             raycast();
         }
 
@@ -72,29 +81,27 @@ public class RayCastOnDracon : MonoBehaviour
     {
         RaycastHit hit;
 
+        DirectionM[0] = transform.forward;
         DirectionM[0] = Vector3.forward;
-    
 
 
-        ray[0] = new Ray(transform.position, Vector3.forward * 30);
-        ray[0] = new Ray(transform.position, DirectionM[0] * 30);
 
-     
+        ray[0] = new Ray(transform.position, this.gameObject.transform.GetChild(0).transform.position*777);
+        
+
+
 
 
         for (int i = 0; i < 1; i++)
         {
             if (Physics.Raycast(ray[i], out hit) )
             {
-                //Debug.DrawRay(transform.position, Vector3.right * hit.distance, Color.red);
-                //Debug.Log(hit.point);
-                //Debug.Log("hit.point");
+            
 
 
                 if (hit.collider.gameObject.tag == "Player")
                 {
-                    Text__info001.text = Text__info001.text + hit.collider.gameObject.tag
-                        + " hit.point " + hit.point.ToString();
+                    
 
                     Pointer.position = hit.point;
 
