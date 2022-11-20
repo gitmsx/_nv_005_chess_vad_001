@@ -21,6 +21,7 @@ public class MotionController : MonoBehaviour
     private Vector3 newRotation;
     private RayCastOn1 rayCast1;
 
+    [HideInInspector] private Text Text__info003;
     [HideInInspector] private Text Text__info002;
 
 
@@ -29,9 +30,16 @@ public class MotionController : MonoBehaviour
         //         RayCastOn1 rayCast1 = gameObject.AddComponent<RayCastOn1>();
         // rayCast1 = new RayCastOn1();
 
-        
+
         Text__info002 = GameObject.Find("TextInfo2").GetComponent<Text>();
         Text__info002.text = "Text__info002";
+
+
+
+
+        Text__info003 = GameObject.Find("TextInfo3").GetComponent<Text>();
+        Text__info003.text = "Text__info003";
+
 
 
 
@@ -55,10 +63,37 @@ public class MotionController : MonoBehaviour
 
             
            var angleToEulerAngles = transform.rotation.ToEulerAngles();
-          //  var angleToEulerAngles2 = transform.rotation.EulerAngles(transform.forward);
+            //  var angleToEulerAngles2 = transform.rotation.EulerAngles(transform.forward);
 
+            
             Text__info002.text = " rotation.y " + trans2.ToString() + " SignedAngle  " + SignedAngle.ToString() + " angle " + angle.ToString() + " Euler Angle " + angleToEulerAngles.ToString() + " Euler Angle y" + angleToEulerAngles.y.ToString();
 
+
+            if (Mathf.Approximately(SignedAngle, 90))
+            {
+                Text__info003.text = " SignedAngle right " + SignedAngle.ToString();
+            }
+            else
+                if (Mathf.Approximately(SignedAngle, -90))
+            {
+                Text__info003.text = " SignedAngle left " + SignedAngle.ToString();
+            }
+            else
+                if (Mathf.Approximately(SignedAngle, 0))
+            {
+                Text__info003.text = " SignedAngle forvard " + SignedAngle.ToString();
+
+            }
+            if (Mathf.Approximately(SignedAngle, 180 ))
+            {
+                Text__info003.text = " SignedAngle back  180.000 " + SignedAngle.ToString();
+
+            }
+            if (Mathf.Approximately(SignedAngle, -180))
+            {
+                Text__info003.text = " SignedAngle back -180.000 " + SignedAngle.ToString();
+
+            }
         }
 
 
