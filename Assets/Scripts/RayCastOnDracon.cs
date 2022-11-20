@@ -6,11 +6,11 @@ using UnityEngine;
 
 using UnityEngine.UI;
 
-public delegate void Ray_Delegate2();
+public delegate void Ray_Delegate3();
 
 
 
-public class RayCastOn2 : MonoBehaviour
+public class RayCastOnDracon : MonoBehaviour
 {
 
 
@@ -73,20 +73,16 @@ public class RayCastOn2 : MonoBehaviour
         RaycastHit hit;
 
         DirectionM[0] = Vector3.forward;
-        DirectionM[1] = Vector3.right;
-        DirectionM[2] = -Vector3.forward;
-        DirectionM[3] = -Vector3.right;
+    
 
 
         ray[0] = new Ray(transform.position, Vector3.forward * 30);
         ray[0] = new Ray(transform.position, DirectionM[0] * 30);
 
-        ray[1] = new Ray(transform.position, Vector3.right * 30);
-        ray[2] = new Ray(transform.position, -Vector3.forward * 30);
-        ray[3] = new Ray(transform.position, -Vector3.right * 30);
+     
 
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 1; i++)
         {
             if (Physics.Raycast(ray[i], out hit) )
             {
