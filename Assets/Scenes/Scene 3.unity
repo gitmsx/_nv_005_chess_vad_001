@@ -579,7 +579,7 @@ GameObject:
   - component: {fileID: 428611200}
   - component: {fileID: 428611199}
   m_Layer: 0
-  m_Name: _SoundTest1
+  m_Name: _MusicBackground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
