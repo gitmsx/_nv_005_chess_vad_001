@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,6 +28,7 @@ public class MotionController : MonoBehaviour
 
     //    private bool isMoveEnd = false; // премещение закончено
     private bool KeyPressed = false; // новое движение
+    private bool SoundStepPlayed = false; // новое движение
 
     private Rigidbody rb;
     int current_direktion = 0;
@@ -51,12 +53,16 @@ public class MotionController : MonoBehaviour
     {
 
 
-        if (!isMoving && KeyPressed)
+        if (isMoving && !SoundStepPlayed)
         {
-            // isMoveEnd = false;
-            KeyPressed = false;
-            // rayCast1.raycast();
+            SoundStepPlayed = true;
+            AudioSource1.PlayOneShot(MoveSound);
 
+        }
+        if (!isMoving && KeyPressed)
+            {
+
+            SoundStepPlayed = false;
             var trans2 = transform.rotation.y;
 
             var angle = Vector3.Angle(Vector3.forward, transform.forward);
@@ -65,6 +71,14 @@ public class MotionController : MonoBehaviour
 
             var angleToEulerAngles = transform.rotation.ToEulerAngles();
             //  var angleToEulerAngles2 = transform.rotation.EulerAngles(transform.forward);
+
+
+            // isMoveEnd = false;
+            // rayCast1.raycast();
+            KeyPressed = false;
+            
+
+
 
 
             Text__info002.text = " rotation.y " + trans2.ToString() + " SignedAngle  " + SignedAngle.ToString() + " angle " + angle.ToString() + " Euler Angle " + angleToEulerAngles.ToString() + " Euler Angle y" + angleToEulerAngles.y.ToString();
@@ -84,14 +98,11 @@ public class MotionController : MonoBehaviour
             {
                 Text__info003.text = " SignedAngle forvard " + SignedAngle.ToString();
             }
-            if (Mathf.Approximately(SignedAngle, 180))
+            if (Mathf.Approximately(Math.Abs( SignedAngle),  180))
             {
                 Text__info003.text = " SignedAngle back  180.000 " + SignedAngle.ToString();
             }
-            if (Mathf.Approximately(SignedAngle, -180))
-            {
-                Text__info003.text = " SignedAngle back -180.000 " + SignedAngle.ToString();
-            }
+            
         }
 
 
