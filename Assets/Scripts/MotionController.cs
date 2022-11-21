@@ -12,7 +12,20 @@ public class MotionController : MonoBehaviour
     Vector3 direction;//направление движения
     Vector3 destPos;//позиция куда двигаемся
 
-//    private bool isMoveEnd = false; // премещение закончено
+
+    [SerializeField] AudioClip MoveSound;
+    [SerializeField] AudioClip WinSound;
+    [SerializeField] AudioClip LoseSound;
+
+    private AudioSource AudioSource1;
+
+
+    public bool AudioIsEnabled = true;
+
+
+
+
+    //    private bool isMoveEnd = false; // премещение закончено
     private bool KeyPressed = false; // новое движение
 
     private Rigidbody rb;
@@ -27,22 +40,10 @@ public class MotionController : MonoBehaviour
 
     private void Start()
     {
-        //         RayCastOn1 rayCast1 = gameObject.AddComponent<RayCastOn1>();
-        // rayCast1 = new RayCastOn1();
-
+        AudioSource1 = GetComponent<AudioSource>();
 
         Text__info002 = GameObject.Find("TextInfo2").GetComponent<Text>();
-        Text__info002.text = "Text__info002";
-
-
-
-
         Text__info003 = GameObject.Find("TextInfo3").GetComponent<Text>();
-        Text__info003.text = "Text__info003";
-
-
-
-
 
     }
 
@@ -53,7 +54,7 @@ public class MotionController : MonoBehaviour
         if (!isMoving && KeyPressed)
         {
             // isMoveEnd = false;
-            KeyPressed=false;
+            KeyPressed = false;
             // rayCast1.raycast();
 
             var trans2 = transform.rotation.y;
@@ -61,11 +62,11 @@ public class MotionController : MonoBehaviour
             var angle = Vector3.Angle(Vector3.forward, transform.forward);
             var SignedAngle = Vector3.SignedAngle(Vector3.forward, transform.forward, Vector3.up);
 
-            
-           var angleToEulerAngles = transform.rotation.ToEulerAngles();
+
+            var angleToEulerAngles = transform.rotation.ToEulerAngles();
             //  var angleToEulerAngles2 = transform.rotation.EulerAngles(transform.forward);
 
-            
+
             Text__info002.text = " rotation.y " + trans2.ToString() + " SignedAngle  " + SignedAngle.ToString() + " angle " + angle.ToString() + " Euler Angle " + angleToEulerAngles.ToString() + " Euler Angle y" + angleToEulerAngles.y.ToString();
 
 
@@ -82,17 +83,14 @@ public class MotionController : MonoBehaviour
                 if (Mathf.Approximately(SignedAngle, 0))
             {
                 Text__info003.text = " SignedAngle forvard " + SignedAngle.ToString();
-
             }
-            if (Mathf.Approximately(SignedAngle, 180 ))
+            if (Mathf.Approximately(SignedAngle, 180))
             {
                 Text__info003.text = " SignedAngle back  180.000 " + SignedAngle.ToString();
-
             }
             if (Mathf.Approximately(SignedAngle, -180))
             {
                 Text__info003.text = " SignedAngle back -180.000 " + SignedAngle.ToString();
-
             }
         }
 
@@ -137,11 +135,11 @@ public class MotionController : MonoBehaviour
             if (transform.position == destPos) isMoving = false;
 
             KeyPressed = true;
-            
+
         }
         else
         {
-            
+
 
             current_direktion = new_direktion;
             if (Input.GetKeyDown(KeyCode.W))
