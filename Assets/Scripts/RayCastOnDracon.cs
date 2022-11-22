@@ -94,8 +94,10 @@ public class RayCastOnDracon : MonoBehaviour
         DirectionM[3] = -Vector3.right;
 
 
-        ray[0] = new Ray(transform.position, Vector3.forward * 30);
         ray[0] = new Ray(transform.position, DirectionM[0] * 30);
+        ray[1] = new Ray(transform.position, DirectionM[1] * 30);
+        ray[2] = new Ray(transform.position, DirectionM[2] * 30);
+        ray[3] = new Ray(transform.position, DirectionM[3] * 30);
 
         ray[1] = new Ray(transform.position, Vector3.right * 30);
         ray[2] = new Ray(transform.position, -Vector3.forward * 30);
